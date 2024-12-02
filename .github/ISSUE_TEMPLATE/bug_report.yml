@@ -1,0 +1,48 @@
+name: Bug Report
+description: バグや意図しない挙動に関しての報告
+title: "bug: "
+labels:
+  - ":bug: bug"
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 概要
+      description: バグの内容や意図しない挙動について記載してください
+      placeholder: "例: 特定のオプションを指定するとコマンドが失敗する．"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 再現手順
+      description: バグを再現する手順について記載してください
+      placeholder: |
+        1. コマンドのオプションに〇〇を指定する
+        2. コマンドを実行する
+        3. 〇〇というエラーメッセージを出力し、コマンドが失敗する
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待する動作
+      description: バグが発生しなかった場合の期待する挙動について記載してください
+      placeholder: "例: 正常にコマンドが実行される"
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境
+      description: バグが発生した環境について記載してください
+      placeholder: "例: v0.1.0-alpha.1"
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: その他
+      description: その他バグに関する情報があれば記載してください
+      placeholder: "例: バグが発生した日時や，その他関連する情報"
