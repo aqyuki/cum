@@ -1,6 +1,5 @@
 name: Feature Request
 description: 新機能の追加や、既存機能の改善など
-title: "feature: "
 labels:
   - ":sparkles: feature"
 

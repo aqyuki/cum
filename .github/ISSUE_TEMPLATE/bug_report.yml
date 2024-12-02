@@ -1,6 +1,5 @@
 name: Bug Report
 description: バグや意図しない挙動に関しての報告
-title: "bug: "
 labels:
   - ":bug: bug"
 
