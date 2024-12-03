@@ -45,7 +45,9 @@ jobs:
       - name: run go vet
         run: go vet ./...
       - name: run staticcheck
-        run: dominikh/staticcheck-action@v1.2.0
+        run: |
+          go install honnef.co/go/tools/cmd/staticcheck@latest
+          staticcheck ./...
   fmt:
     name: Run fmt
     runs-on: ubuntu-latest
