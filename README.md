@@ -30,6 +30,8 @@ Voice Chatへの入退出があった場合に、指定されたチャンネル�
 
 - Go (>=1.23.0)
 - Docker (>= 27.3.1)
+- [Staticcheck](https://staticcheck.dev/)
+- [GCI](https://github.com/daixiang0/gci)
 
 また、以下のツールは開発に必須ではないですが、導入することでより快適に開発を進めることが可能です．
 
