@@ -1,0 +1,68 @@
+name: CI
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - "**/*.go"
+      - "go.mod"
+      - "go.sum"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  attestations: write
+  pull-requests: write
+
+jobs:
+  test:
+    name: Runt test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: "go.mod"
+      - name: run tests
+        run: go test -v -shuffle=$GITHUB_RUN_ID -coverprofile=coverage.out ./...
+      - name: comment coverage
+        uses: k1LoW/octocov-action@v1
+  lint:
+    name: Run lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: "go.mod"
+      - name: run go vet
+        run: go vet ./...
+      - name: run staticcheck
+        run: dominikh/staticcheck-action@v1.2.0
+  fmt:
+    name: Run fmt
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: "go.mod"
+      - name: install gci
+        run: go install github.com/daixiang0/gci@latest
+      - name: check format
+        run: |
+          OUTPUT=$(gci list ./ --skip-generated --skip-vendor)
+          if [[ -n "$OUTPUT" ]]; then
+            echo "The following files require formatting!"
+            echo "$OUTPUT"
+            exit 1
+          fi
